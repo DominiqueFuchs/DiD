@@ -32,13 +32,22 @@ jobs:
         id: set-matrix
         run: |
           IMAGES=$(jq -n -c '[
-            {"distro_name": "alma", "distro_version": "8", "file": "alma_8", "codename": ""},
-            {"distro_name": "alma", "distro_version": "9", "file": "alma_9", "codename": ""},
-            {"distro_name": "debian", "distro_version": "11", "file": "debian_11", "codename": "bullseye"},
-            {"distro_name": "debian", "distro_version": "12", "file": "debian_12", "codename": "bookworm"},
-            {"distro_name": "ubuntu", "distro_version": "22.04", "file": "ubuntu_2204", "codename": "jammy"},
-            {"distro_name": "ubuntu", "distro_version": "24.04", "file": "ubuntu_2404", "codename": "noble"}
+            {"distro_name": "alma", "distro_version": "8", "codename": ""},
+            {"distro_name": "alma", "distro_version": "9", "codename": ""},
+            {"distro_name": "debian", "distro_version": "11", "codename": "bullseye"},
+            {"distro_name": "debian", "distro_version": "12", "codename": "bookworm"},
+            {"distro_name": "ubuntu", "distro_version": "22.04", "codename": "jammy"},
+            {"distro_name": "ubuntu", "distro_version": "24.04", "codename": "noble"}
           ]')
+
+          if [[ "${{ github.event.inputs.image }}" != "all" ]]; then
+            INPUT="${{ github.event.inputs.image }}"
+            NAME="${INPUT%_*}"
+            VERSION="${INPUT#*_}"
+
+            IMAGES=$(echo "$IMAGES" | jq --arg name "$NAME" --arg version "$VERSION" \
+              '[.[] | select(.distro_name == $name and .distro_version == $version)]')
+          fi
 
           echo "matrix=$IMAGES" >> $GITHUB_OUTPUT
 
@@ -79,7 +88,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./${{ matrix.file }}.Dockerfile
+          file: ./${{ matrix.distro_name }}_${{ matrix.distro_version }}.Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
