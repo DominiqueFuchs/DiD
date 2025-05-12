@@ -1,5 +1,5 @@
 ---
-name: Publish Docker Images
+name: Publishing
 
 env:
   DOCKERHUB_NAMESPACE: dfuchs

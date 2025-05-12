@@ -1,3 +1,5 @@
+[![CI Builds](https://github.com/DominiqueFuchs/DiD/actions/workflows/build.yaml/badge.svg)](https://github.com/DominiqueFuchs/DiD/actions/workflows/build.yaml)
+
 # DiD - Docker in Docker
 
 This repository provides Docker images with Docker CE pre-installed and configured for various Linux distributions that can be used to test docker target systems in CI scenarios.

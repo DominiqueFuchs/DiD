@@ -1,5 +1,5 @@
 ---
-name: Build Docker Images
+name: CI Builds
 
 env:
   DOCKERHUB_NAMESPACE: dfuchs
