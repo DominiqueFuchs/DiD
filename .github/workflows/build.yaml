@@ -34,8 +34,8 @@ on:
           - alma_9
           - debian_11
           - debian_12
-          - ubuntu_2204
-          - ubuntu_2404
+          - ubuntu_22.04
+          - ubuntu_24.04
 
 jobs:
 
@@ -85,8 +85,8 @@ jobs:
                 {"distro_name":"alma","distro_version":9},
                 {"distro_name":"debian","distro_version":11},
                 {"distro_name":"debian","distro_version":12},
-                {"distro_name":"ubuntu","distro_version":2204},
-                {"distro_name":"ubuntu","distro_version":2404}
+                {"distro_name":"ubuntu","distro_version":22.04},
+                {"distro_name":"ubuntu","distro_version":24.04}
               ]')
             else
               NAME="${IMAGE%_*}"
@@ -98,8 +98,8 @@ jobs:
             [[ "${{ steps.changed.outputs.alma_9_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"alma","distro_version":9}]' <<<"$MATRIX")
             [[ "${{ steps.changed.outputs.debian_11_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"debian","distro_version":11}]' <<<"$MATRIX")
             [[ "${{ steps.changed.outputs.debian_12_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"debian","distro_version":12}]' <<<"$MATRIX")
-            [[ "${{ steps.changed.outputs.ubuntu_2204_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"ubuntu","distro_version":2204}]' <<<"$MATRIX")
-            [[ "${{ steps.changed.outputs.ubuntu_2404_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"ubuntu","distro_version":2404}]' <<<"$MATRIX")
+            [[ "${{ steps.changed.outputs.ubuntu_2204_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"ubuntu","distro_version":22.04}]' <<<"$MATRIX")
+            [[ "${{ steps.changed.outputs.ubuntu_2404_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"ubuntu","distro_version":24.04}]' <<<"$MATRIX")
           fi
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
         shell: bash
