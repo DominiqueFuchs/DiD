@@ -40,6 +40,15 @@ jobs:
             {"distro_name": "ubuntu", "distro_version": "24.04", "codename": "noble"}
           ]')
 
+          if [[ "${{ github.event.inputs.image }}" != "all" ]]; then
+            INPUT="${{ github.event.inputs.image }}"
+            NAME="${INPUT%_*}"
+            VERSION="${INPUT#*_}"
+
+            IMAGES=$(echo "$IMAGES" | jq --arg name "$NAME" --arg version "$VERSION" \
+              '[.[] | select(.distro_name == $name and .distro_version == $version)]')
+          fi
+
           echo "matrix=$IMAGES" >> $GITHUB_OUTPUT
 
           MAX_VERSIONS=$(echo "$IMAGES" | jq -c '{
