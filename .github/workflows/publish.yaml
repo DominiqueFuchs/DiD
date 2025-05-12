@@ -46,7 +46,7 @@ jobs:
             NAME="${INPUT%_*}"
             VERSION="${INPUT#*_}"
 
-            IMAGES=$(echo "$IMAGES" | jq --arg name "$NAME" --arg version "$VERSION" \
+            IMAGES=$(echo "$ALL_IMAGES" | jq -c --arg name "$NAME" --arg version "$VERSION" \
               '[.[] | select(.distro_name == $name and .distro_version == $version)]')
           fi
           echo "matrix=$IMAGES" >> $GITHUB_OUTPUT
