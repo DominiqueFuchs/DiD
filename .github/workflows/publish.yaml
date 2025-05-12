@@ -31,7 +31,7 @@ jobs:
       - name: Set matrix and calculate max versions
         id: set-matrix
         run: |
-          IMAGES=$(jq -n -c '[
+          ALL_IMAGES=$(jq -n -c '[
             {"distro_name": "alma", "distro_version": "8", "codename": ""},
             {"distro_name": "alma", "distro_version": "9", "codename": ""},
             {"distro_name": "debian", "distro_version": "11", "codename": "bullseye"},
@@ -40,6 +40,7 @@ jobs:
             {"distro_name": "ubuntu", "distro_version": "24.04", "codename": "noble"}
           ]')
 
+          IMAGES="$ALL_IMAGES"
           if [[ "${{ github.event.inputs.image }}" != "all" ]]; then
             INPUT="${{ github.event.inputs.image }}"
             NAME="${INPUT%_*}"
@@ -48,10 +49,9 @@ jobs:
             IMAGES=$(echo "$IMAGES" | jq --arg name "$NAME" --arg version "$VERSION" \
               '[.[] | select(.distro_name == $name and .distro_version == $version)]')
           fi
-
           echo "matrix=$IMAGES" >> $GITHUB_OUTPUT
 
-          MAX_VERSIONS=$(echo "$IMAGES" | jq -c '{
+          MAX_VERSIONS=$(echo "$ALL_IMAGES" | jq -c '{
             alma: [.[] | select(.distro_name == "alma") | .distro_version] | max_by(tonumber),
             debian: [.[] | select(.distro_name == "debian") | .distro_version] | max_by(tonumber),
             ubuntu: [.[] | select(.distro_name == "ubuntu") | .distro_version] | max_by(sub("[.]"; "") | tonumber)
