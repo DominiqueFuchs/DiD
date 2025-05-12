@@ -9,8 +9,8 @@ This repository provides Docker images with Docker CE pre-installed and configur
 
 - These containers require `--privileged` mode to run Docker inside Docker properly.
 - All images contain systemd as the configured init system
-- Published platform builds include linux/amd64 and linux/arm64
-- The `latest` tag on Docker Hub will always point to the latest version of that distro within the corresponding repository.
+- Published platform builds include *linux/amd64* and *linux/arm64*
+- The *latest* tag on Docker Hub will always point to the latest version of that distro within the corresponding repository.
 
 ## Available Images
 
