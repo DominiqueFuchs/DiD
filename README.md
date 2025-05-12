@@ -1,7 +1,7 @@
 [![CI Builds](https://github.com/DominiqueFuchs/DiD/actions/workflows/build.yaml/badge.svg)](https://github.com/DominiqueFuchs/DiD/actions/workflows/build.yaml)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/DominiqueFuchs/DiD/main.svg)](https://results.pre-commit.ci/latest/github/DominiqueFuchs/DiD/main)
 
-# DiD - Docker in Docker
+# DiD - Docker in Docker Containers
 
 This repository provides Docker images with Docker CE pre-installed and configured for various Linux distributions that can be used to test docker target systems in CI scenarios.
 
