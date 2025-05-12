@@ -14,11 +14,13 @@ on:
       - main
     paths:
       - '*.Dockerfile'
+      - '.github/workflows/build.yaml'
   pull_request:
     branches:
       - main
     paths:
       - '*.Dockerfile'
+      - '.github/workflows/build.yaml'
   workflow_dispatch:
     inputs:
       image:
@@ -65,12 +67,18 @@ jobs:
               - ubuntu_2204.Dockerfile
             ubuntu_2404:
               - ubuntu_2404.Dockerfile
+            workflow:
+              - .github/workflows/build.yaml
 
       - id: set-matrix
         run: |
           MATRIX="[]"
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" || "${{ steps.changed.outputs.workflow_any_changed }}" == "true" ]]; then
             IMAGE="${{ github.event.inputs.image }}"
+            if [[ "${{ github.event_name }}" != "workflow_dispatch" ]]; then
+              IMAGE="all"
+            fi
+
             if [[ "$IMAGE" == "all" ]]; then
               MATRIX=$(jq -n -c '[
                 {"distro_name":"alma","distro_version":8},
