@@ -63,4 +63,5 @@ jobs:
           push: true
           tags: |
             ${{ env.DOCKERHUB_NAMESPACE }}/did-${{ matrix.distro_name }}:latest
+            ${{ env.DOCKERHUB_NAMESPACE }}/did-${{ matrix.distro_name }}:${{ matrix.distro_version }}
           cache-from: type=gha,scope=${{ matrix.distro_name }}_${{ matrix.distro_version }}
