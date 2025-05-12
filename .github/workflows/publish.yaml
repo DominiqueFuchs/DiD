@@ -96,3 +96,18 @@ jobs:
             ${{ matrix.distro_version == fromJson(needs.matrix-setup.outputs.max_versions)[matrix.distro_name] && format('{0}/did-{1}:latest', env.DOCKERHUB_NAMESPACE, matrix.distro_name) || '' }}
             ${{ matrix.codename != '' && format('{0}/did-{1}:{2}', env.DOCKERHUB_NAMESPACE, matrix.distro_name, matrix.codename) || '' }}
           cache-from: type=gha,scope=${{ matrix.distro_name }}_${{ matrix.distro_version }}
+
+      - name: Publish ${{ matrix.distro_name }}_${{ matrix.distro_version }}-extra
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./${{ matrix.distro_name }}_${{ matrix.distro_version }}.Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            EXTRA_PACKAGES=true
+          tags: |
+            ${{ env.DOCKERHUB_NAMESPACE }}/did-${{ matrix.distro_name }}:${{ matrix.distro_version }}-extra
+            ${{ matrix.distro_version == fromJson(needs.matrix-setup.outputs.max_versions)[matrix.distro_name] && format('{0}/did-{1}:latest-extra', env.DOCKERHUB_NAMESPACE, matrix.distro_name) || '' }}
+            ${{ matrix.codename != '' && format('{0}/did-{1}:{2}-extra', env.DOCKERHUB_NAMESPACE, matrix.distro_name, matrix.codename) || '' }}
+          cache-from: type=gha,scope=${{ matrix.distro_name }}_${{ matrix.distro_version }}-extra

@@ -1,6 +1,8 @@
 FROM jrei/systemd-ubuntu:24.04
 LABEL org.opencontainers.image.authors="Dominique Fuchs"
 
+ARG EXTRA_PACKAGES=false
+
 RUN apt-get -y update && apt-get -y install ca-certificates curl && \
     install -m 0755 -d /etc/apt/keyrings && \
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc && \
@@ -13,3 +15,11 @@ RUN apt-get -y update && apt-get -y install ca-certificates curl && \
     apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && \
     apt-get -y clean && \
     systemctl enable docker
+
+RUN if [ "$EXTRA_PACKAGES" = true ]; then \
+    apt-get -y update && \
+    apt-get -y install \
+        acl g++ gcc git gpg make \
+        python3 python3-pip python3-setuptools python3-wheel && \
+    apt-get -y clean; \
+    fi
