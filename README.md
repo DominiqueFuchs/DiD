@@ -14,17 +14,17 @@ This repository provides Docker images with Docker CE pre-installed and configur
 
 ## Available Images
 
-- **[Ubuntu](https://hub.docker.com/r/dfuchs/did-ubuntu)**:
-  - Ubuntu 22.04 LTS (Jammy Jellyfish)
-  - Ubuntu 24.04 LTS (Noble Numbat)
+- **[dfuchs/did-alma](https://hub.docker.com/r/dfuchs/did-alma)**:
+  - AlmaLinux 8
+  - AlmaLinux 9
 
-- **[Debian](https://hub.docker.com/r/dfuchs/did-debian)**:
+- **[dfuchs/did-debian](https://hub.docker.com/r/dfuchs/did-debian)**:
   - Debian 11 (Bullseye)
   - Debian 12 (Bookworm)
 
-- **[AlmaLinux](https://hub.docker.com/r/dfuchs/did-alma)**:
-  - AlmaLinux 8
-  - AlmaLinux 9
+- **[dfuchs/did-ubuntu](https://hub.docker.com/r/dfuchs/did-ubuntu)**:
+  - Ubuntu 22.04 LTS (Jammy Jellyfish)
+  - Ubuntu 24.04 LTS (Noble Numbat)
 
 ## Usage
 
