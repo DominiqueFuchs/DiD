@@ -22,23 +22,40 @@ on:
           - ubuntu_2404
 
 jobs:
+  matrix-setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      max_versions: ${{ steps.set-matrix.outputs.max_versions }}
+    steps:
+      - name: Set matrix and calculate max versions
+        id: set-matrix
+        run: |
+          IMAGES=$(jq -n -c '[
+            {"distro_name": "alma", "distro_version": "8"},
+            {"distro_name": "alma", "distro_version": "9"},
+            {"distro_name": "debian", "distro_version": "11"},
+            {"distro_name": "debian", "distro_version": "12"},
+            {"distro_name": "ubuntu", "distro_version": "2204"},
+            {"distro_name": "ubuntu", "distro_version": "2404"}
+          ]')
+
+          echo "matrix=$IMAGES" >> $GITHUB_OUTPUT
+
+          MAX_VERSIONS=$(echo "$IMAGES" | jq -c '{
+            alma: [.[] | select(.distro_name == "alma") | .distro_version] | max_by(tonumber),
+            debian: [.[] | select(.distro_name == "debian") | .distro_version] | max_by(tonumber),
+            ubuntu: [.[] | select(.distro_name == "ubuntu") | .distro_version] | max_by(tonumber)
+          }')
+          
+          echo "max_versions=$MAX_VERSIONS" >> $GITHUB_OUTPUT
+
   publish:
+    needs: matrix-setup
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        include:
-          - distro_name: alma
-            distro_version: 8
-          - distro_name: alma
-            distro_version: 9
-          - distro_name: debian
-            distro_version: 11
-          - distro_name: debian
-            distro_version: 12
-          - distro_name: ubuntu
-            distro_version: 2204
-          - distro_name: ubuntu
-            distro_version: 2404
+        include: ${{ fromJson(needs.matrix-setup.outputs.matrix) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -54,6 +71,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+
       - name: Publish ${{ matrix.distro_name }}_${{ matrix.distro_version }}
         if: github.event.inputs.image == 'all' || github.event.inputs.image == 'all' || github.event.inputs.image == format('{0}_{1}', matrix.distro_name, matrix.distro_version)
         uses: docker/build-push-action@v6
@@ -62,6 +80,6 @@ jobs:
           file: ./${{ matrix.distro_name }}_${{ matrix.distro_version }}.Dockerfile
           push: true
           tags: |
-            ${{ env.DOCKERHUB_NAMESPACE }}/did-${{ matrix.distro_name }}:latest
             ${{ env.DOCKERHUB_NAMESPACE }}/did-${{ matrix.distro_name }}:${{ matrix.distro_version }}
+            ${{ matrix.distro_version == fromJson(needs.matrix-setup.outputs.max_versions)[matrix.distro_name] && format('{0}/did-{1}:latest', env.DOCKERHUB_NAMESPACE, matrix.distro_name) || '' }}
           cache-from: type=gha,scope=${{ matrix.distro_name }}_${{ matrix.distro_version }}
