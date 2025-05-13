@@ -20,7 +20,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Update Docker Hub description (alma-9)
+      - name: Update Docker Hub description (alma)
         uses: peter-evans/dockerhub-description@v4
         with:
           username: dfuchs
@@ -28,7 +28,7 @@ jobs:
           repository: ${{ env.DOCKERHUB_NAMESPACE }}/did-alma
           short-description: ${{ github.event.repository.description }}
 
-      - name: Update Docker Hub description (alma-9)
+      - name: Update Docker Hub description (debian)
         uses: peter-evans/dockerhub-description@v4
         with:
           username: dfuchs
@@ -36,7 +36,7 @@ jobs:
           repository: ${{ env.DOCKERHUB_NAMESPACE }}/did-debian
           short-description: ${{ github.event.repository.description }}
 
-      - name: Update Docker Hub description (alma-9)
+      - name: Update Docker Hub description (ubuntu)
         uses: peter-evans/dockerhub-description@v4
         with:
           username: dfuchs
