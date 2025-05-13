@@ -10,6 +10,7 @@ on:
       - main
     paths:
       - 'README.md'
+      - '.github/workflows/hub.yaml'
   workflow_dispatch:
 
 jobs:
