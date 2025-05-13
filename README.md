@@ -44,6 +44,6 @@ In most cases, they'd be used in existing pipelines or tooling as a base image (
 To manually run a container:
 
 ```bash
-docker pull dfuchs/did-ubuntu:22.04
+docker pull dfuchs/did-ubuntu:24.04
 docker run -d --privileged --name my-did-container dfuchs/did-ubuntu:24.04
 ```
