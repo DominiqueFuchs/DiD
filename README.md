@@ -34,7 +34,7 @@ All images have a *base* and an *extra* variant.
 
 **Extra** variants include additional packages on top of the Docker CE package layer and are published with an *extra-* prefix in the version tags, e.g. *did-\<distro\>:\<version\>-extra*, *did-\<distro\>:\<codename\>-extra* and *did-\<distro\>:latest-extra* will point to the corresponding base images. All extra packages are installed through distribution package management and sources, thus with the latest available version for that specific distribution version:
 
-- acl, g++, gcc, git, make
+- acl, g++, gcc, git, gpg, make
 - Python3 including pip, setuptools, wheel
 
 ## Usage
