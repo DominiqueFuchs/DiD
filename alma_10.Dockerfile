@@ -14,7 +14,7 @@ RUN dnf -y update && \
 RUN if [ "$EXTRA_PACKAGES" = true ]; then \
         dnf -y install \
             acl g++ gcc git gpg make \
-            python3 python3-pip python3-pip-wheel python3-setuptools python3-setuptools-wheel && \
+            python3 python3-pip python3-pip-wheel python3-setuptools && \
         dnf -y clean all && \
         rm -rf /var/cache/dnf; \
     fi
