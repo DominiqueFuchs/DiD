@@ -16,6 +16,7 @@ on:
           - all
           - alma_8
           - alma_9
+          - alma_10
           - debian_11
           - debian_12
           - ubuntu_22.04
@@ -34,6 +35,7 @@ jobs:
           ALL_IMAGES=$(jq -n -c '[
             {"distro_name": "alma", "distro_version": "8", "codename": ""},
             {"distro_name": "alma", "distro_version": "9", "codename": ""},
+            {"distro_name": "alma", "distro_version": "10", "codename": ""},
             {"distro_name": "debian", "distro_version": "11", "codename": "bullseye"},
             {"distro_name": "debian", "distro_version": "12", "codename": "bookworm"},
             {"distro_name": "ubuntu", "distro_version": "22.04", "codename": "jammy"},
