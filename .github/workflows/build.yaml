@@ -94,12 +94,12 @@ jobs:
               MATRIX="[ {\"distro_name\":\"$NAME\",\"distro_version\":\"$VERSION\"} ]"
             fi
           else
-            [[ "${{ steps.changed.outputs.alma_8_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"alma","distro_version":"8"}]' <<<"$MATRIX")
-            [[ "${{ steps.changed.outputs.alma_9_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"alma","distro_version":"9"}]' <<<"$MATRIX")
-            [[ "${{ steps.changed.outputs.debian_11_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"debian","distro_version":"11"}]' <<<"$MATRIX")
-            [[ "${{ steps.changed.outputs.debian_12_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"debian","distro_version":"12"}]' <<<"$MATRIX")
-            [[ "${{ steps.changed.outputs.ubuntu_22_04_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"ubuntu","distro_version":"22.04"}]' <<<"$MATRIX")
-            [[ "${{ steps.changed.outputs.ubuntu_24_04_any_changed }}" == "true" ]] && MATRIX=$(jq '. + [{"distro_name":"ubuntu","distro_version":"24.04"}]' <<<"$MATRIX")
+            [[ "${{ steps.changed.outputs.alma_8_any_changed }}" == "true" ]] && MATRIX=$(jq -c '. + [{"distro_name":"alma","distro_version":"8"}]' <<<"$MATRIX")
+            [[ "${{ steps.changed.outputs.alma_9_any_changed }}" == "true" ]] && MATRIX=$(jq -c '. + [{"distro_name":"alma","distro_version":"9"}]' <<<"$MATRIX")
+            [[ "${{ steps.changed.outputs.debian_11_any_changed }}" == "true" ]] && MATRIX=$(jq -c '. + [{"distro_name":"debian","distro_version":"11"}]' <<<"$MATRIX")
+            [[ "${{ steps.changed.outputs.debian_12_any_changed }}" == "true" ]] && MATRIX=$(jq -c '. + [{"distro_name":"debian","distro_version":"12"}]' <<<"$MATRIX")
+            [[ "${{ steps.changed.outputs.ubuntu_22_04_any_changed }}" == "true" ]] && MATRIX=$(jq -c '. + [{"distro_name":"ubuntu","distro_version":"22.04"}]' <<<"$MATRIX")
+            [[ "${{ steps.changed.outputs.ubuntu_24_04_any_changed }}" == "true" ]] && MATRIX=$(jq -c '. + [{"distro_name":"ubuntu","distro_version":"24.04"}]' <<<"$MATRIX")
           fi
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
         shell: bash
