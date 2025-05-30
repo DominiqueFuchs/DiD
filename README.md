@@ -17,6 +17,7 @@ This repository provides Docker images with Docker CE pre-installed and configur
 - **[dfuchs/did-alma](https://hub.docker.com/r/dfuchs/did-alma)**:
   - AlmaLinux 8
   - AlmaLinux 9
+  - AlmaLinux 10
 
 - **[dfuchs/did-debian](https://hub.docker.com/r/dfuchs/did-debian)**:
   - Debian 11 (Bullseye)

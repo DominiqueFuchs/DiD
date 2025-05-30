@@ -32,6 +32,7 @@ on:
           - all
           - alma_8
           - alma_9
+          - alma_10
           - debian_11
           - debian_12
           - ubuntu_22.04
@@ -59,6 +60,8 @@ jobs:
               - alma_8.Dockerfile
             alma_9:
               - alma_9.Dockerfile
+            alma_10:
+              - alma_10.Dockerfile
             debian_11:
               - debian_11.Dockerfile
             debian_12:
@@ -83,6 +86,7 @@ jobs:
               MATRIX=$(jq -n -c '[
                 {"distro_name": "alma", "distro_version": "8"},
                 {"distro_name": "alma", "distro_version": "9"},
+                {"distro_name": "alma", "distro_version": "10"},
                 {"distro_name": "debian", "distro_version": "11"},
                 {"distro_name": "debian", "distro_version": "12"},
                 {"distro_name": "ubuntu", "distro_version": "22.04"},
@@ -96,6 +100,7 @@ jobs:
           else
             [[ "${{ steps.changed.outputs.alma_8_any_changed }}" == "true" ]] && MATRIX=$(jq -c '. + [{"distro_name":"alma","distro_version":"8"}]' <<<"$MATRIX")
             [[ "${{ steps.changed.outputs.alma_9_any_changed }}" == "true" ]] && MATRIX=$(jq -c '. + [{"distro_name":"alma","distro_version":"9"}]' <<<"$MATRIX")
+            [[ "${{ steps.changed.outputs.alma_10_any_changed }}" == "true" ]] && MATRIX=$(jq -c '. + [{"distro_name":"alma","distro_version":"10"}]' <<<"$MATRIX")
             [[ "${{ steps.changed.outputs.debian_11_any_changed }}" == "true" ]] && MATRIX=$(jq -c '. + [{"distro_name":"debian","distro_version":"11"}]' <<<"$MATRIX")
             [[ "${{ steps.changed.outputs.debian_12_any_changed }}" == "true" ]] && MATRIX=$(jq -c '. + [{"distro_name":"debian","distro_version":"12"}]' <<<"$MATRIX")
             [[ "${{ steps.changed.outputs.ubuntu_22_04_any_changed }}" == "true" ]] && MATRIX=$(jq -c '. + [{"distro_name":"ubuntu","distro_version":"22.04"}]' <<<"$MATRIX")
