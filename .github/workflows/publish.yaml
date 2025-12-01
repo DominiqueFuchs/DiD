@@ -19,6 +19,7 @@ on:
           - alma_10
           - debian_11
           - debian_12
+          - debian_13
           - ubuntu_22.04
           - ubuntu_24.04
 
@@ -38,6 +39,7 @@ jobs:
             {"distro_name": "alma", "distro_version": "10", "codename": ""},
             {"distro_name": "debian", "distro_version": "11", "codename": "bullseye"},
             {"distro_name": "debian", "distro_version": "12", "codename": "bookworm"},
+            {"distro_name": "debian", "distro_version": "13", "codename": "trixie"},
             {"distro_name": "ubuntu", "distro_version": "22.04", "codename": "jammy"},
             {"distro_name": "ubuntu", "distro_version": "24.04", "codename": "noble"}
           ]')
