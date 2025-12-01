@@ -22,6 +22,7 @@ This repository provides Docker images with Docker CE pre-installed and configur
 - **[dfuchs/did-debian](https://hub.docker.com/r/dfuchs/did-debian)**:
   - Debian 11 (Bullseye)
   - Debian 12 (Bookworm)
+  - Debian 13 (Trixie)
 
 - **[dfuchs/did-ubuntu](https://hub.docker.com/r/dfuchs/did-ubuntu)**:
   - Ubuntu 22.04 LTS (Jammy Jellyfish)
