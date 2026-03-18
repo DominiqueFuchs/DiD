@@ -1,5 +1,5 @@
-[![CI Builds](https://github.com/DominiqueFuchs/DiD/actions/workflows/build.yaml/badge.svg)](https://github.com/DominiqueFuchs/DiD/actions/workflows/build.yaml)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/DominiqueFuchs/DiD/main.svg)](https://results.pre-commit.ci/latest/github/DominiqueFuchs/DiD/main)
+[![CI Builds](https://github.com/dmnq-f/DiD/actions/workflows/build.yaml/badge.svg)](https://github.com/dmnq-f/DiD/actions/workflows/build.yaml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/dmnq-f/DiD/main.svg)](https://results.pre-commit.ci/latest/github/dmnq-f/DiD/main)
 
 # DiD - Docker in Docker Containers
 
